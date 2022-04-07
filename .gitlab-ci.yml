@@ -44,14 +44,18 @@ bandit:
     - docker
     - linux
   script:
-    - bandit -f json -o $CI_PROJECT_DIR/gl-bandit-report.json
+    - bandit *.py -f json -o $CI_PROJECT_DIR/gl-bandit-report.json
   artifacts:
     reports:
       sast: gl-bandit-report.json
 
 sast:
   stage: test
+  tags:
+    - docker
+    - linux
 include:
 - template: Security/SAST.gitlab-ci.yml
 variables:
   SAST_EXCLUDED_ANALYZERS: "eslint,bandit"
+
