@@ -21,29 +21,25 @@ mypy:
   - python3 -m mypy --ignore-missing-imports chatbot-webgui.py
   - python3 -m mypy --ignore-missing-imports chatbot_ai.py
   tags:
-  - docker
-  - linux
+  - python
 flake8:
   stage: Static Analysis
   script:
   - flake8 --max-line-length=120 --ignore=F401 *.py
   tags:
-  - docker
-  - linux
+  - python
 pylint:
   stage: Static Analysis
   allow_failure: true
   script:
   - pylint -d C0301,C0103,C0114,C0116,C0115,C0411,R,W *.py
   tags:
-  - docker
-  - linux
+  - python
 bandit:
   stage: test
   allow_failure: true
   tags:
-    - docker
-    - linux
+    - python
   script:
     - bandit *.py -f json -o $CI_PROJECT_DIR/gl-bandit-report.json
   artifacts:
@@ -54,7 +50,6 @@ sast:
   stage: test
   tags:
     - docker
-    - linux
 include:
 - template: Security/SAST.gitlab-ci.yml
 variables:
