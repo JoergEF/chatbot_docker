@@ -40,6 +40,7 @@ pylint:
   - linux
 bandit:
   stage: test
+  allow_failure: true
   tags:
     - docker
     - linux
